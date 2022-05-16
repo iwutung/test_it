@@ -11,6 +11,19 @@ int _putc(char c)
     return (write(1, &c, 1));
 }
 
+int _prints(char *s)
+{
+    int j = 0;
+
+    while (s[j] != '\0')
+    {
+        _putc(s[j]);
+        j++;
+
+    }
+    return (0);
+}
+
 #include <stdarg.h>
 
 int _printf(const char *format, ...)
@@ -32,7 +45,6 @@ int _printf(const char *format, ...)
         {
             if (format[i+1] == 'c')
             {
-                /*_printi(c);*/
                 _putc(va_arg(args, int));
                 i++;
             }
@@ -40,14 +52,15 @@ int _printf(const char *format, ...)
             else if (format[i+1] == 's')
             {
                 str = va_arg(args, char *);
-                int j = 0;
+                _prints(str);
+                /*int j = 0;
 
                 while (str[j] != '\0')
                 {
                     _putc(str[j]);
                     j++;
 
-                }
+                }*/
                 i++;
             }
             else if (format[i+1] == '%')
