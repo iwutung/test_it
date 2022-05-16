@@ -46,6 +46,7 @@ int _printf(const char *format, ...)
 
 int main(void)
 {
+	printf("Hello, i added this");
     _printf("Hello worl%c\n", '1');
     printf("Hello 100%%\n");
 
