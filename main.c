@@ -17,6 +17,8 @@ int _printf(const char *format, ...)
 {
     va_list args;
     int i = 0;
+    char *str;
+
 
     va_start(args, format);
 
@@ -30,10 +32,31 @@ int _printf(const char *format, ...)
         {
             if (format[i+1] == 'c')
             {
+                /*_printi(c);*/
                 _putc(va_arg(args, int));
                 i++;
             }
+
+            else if (format[i+1] == 's')
+            {
+                str = va_arg(args, char *);
+                int j = 0;
+
+                while (str[j] != '\0')
+                {
+                    _putc(str[j]);
+                    j++;
+
+                }
+                i++;
+            }
+            else if (format[i+1] == '%')
+            {
+                _putc('%');
+                i++;
+            }
         }
+
         i++;
     }
 
@@ -46,8 +69,10 @@ int _printf(const char *format, ...)
 
 int main(void)
 {
-    _printf("Hello worl%c\n", '1');
-    printf("Hello 100%%\n");
+    _printf("Hello worl%c\n", 'd');
+    _printf("Hello %s\n", "world");
+    /*printf("Hello 100%%\n");*/
+    _printf("Hello 100%%\n");
 
     return (0);
 }
