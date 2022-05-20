@@ -114,12 +114,12 @@ int (*_select(char c))(va_list)
 int _printf(const char *format, ...)
 {
     int count = 0;
-    int (*func)(va_list);
 
     if (format != NULL)
     {
         va_list args;
         int i = 0;
+        int (*func)(va_list);
 
         va_start(args, format);
 
@@ -128,7 +128,13 @@ int _printf(const char *format, ...)
 
         while (format[i] != '\0')
         {
-            if (format[i] == '%')
+            if (format[i] != '%')
+            {
+                _putc(format[i]);
+                count++;
+            }
+
+            else
             {            
                 /*if (format[i+1] == 'c')
                 {
@@ -155,11 +161,11 @@ int _printf(const char *format, ...)
                     //count++;
                     i++;
                 }*/
-                else if (format[i] == '%')
+                /*else if (format[i] == '%')
                 {
                     _putc(format[i]);
                     count++;
-                }
+                }*/
 
                 else
                 {
@@ -167,17 +173,12 @@ int _printf(const char *format, ...)
                     if (func != NULL)
                     {
                         count += func(args);
-                        //i++;
+                        i++;
                     }
-                    i++;
                 }
                 
             }
-            else
-            {
-                _putc(format[i]);
-                count++;
-            }
+            
             i++;
 
         }

@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <stddef.h>
 
 int _putc(char c);
 int _printc(va_list args);
